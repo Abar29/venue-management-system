@@ -56,20 +56,12 @@ namespace VenueManagement
                 return;
             }
 
-            // Check if the selected date is already reserved
-            if (IsDateReserved(selectedDateTime.ToString("yyyy-MM-dd")))
-            {
-                MessageBox.Show("Event not available!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                // If the date is not reserved, proceed to the fillForms form
-                static_day = selectedDateTime.ToString("yyyy-MM-dd");
-                fillForms fillForms = new fillForms();
-                fillForms.StartingDateTextBox.Text = static_day;
-                fillForms.Show();
-                this.Hide();
-            }
+            // Proceed to the fillForms form
+            static_day = selectedDateTime.ToString("dd/MM/yyyy");
+            fillForms fillForms = new fillForms();
+            fillForms.StartingDateTextBox.Text = static_day;
+            fillForms.Show();
+            this.Hide();
         }
 
         // Function to check if the date is reserved in the database
