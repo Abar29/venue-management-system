@@ -1,0 +1,17 @@
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\bin\Debug\VenueManagement.exe.config
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\bin\Debug\VenueManagement.exe
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\bin\Debug\VenueManagement.pdb
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.Properties.Resources.resources
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.csproj.GenerateResource.cache
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.exe
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.pdb
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.adminForm.resources
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.reservation.resources
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.fillForms.resources
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.UserControlBlank.resources
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.UserControlDays.resources
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.csproj.CopyComplete
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.addvenuecs.resources
+C:\Users\admin\source\repos\VenueManagement\VenueManagement\obj\Debug\VenueManagement.LoginForm.resources
