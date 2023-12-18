@@ -34,20 +34,39 @@ namespace VenueManagement
 
         private void UserControlDays_Click(object sender, EventArgs e)
         {
-            // Assuming lbldays.Text is the selected date
-            string selectedDate = lbldays.Text;
+            // Get the current year and month
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
+
+            // Parse the day number from lbldays.Text into an integer
+            int day;
+            if (!int.TryParse(lbldays.Text, out day))
+            {
+                MessageBox.Show("Invalid day number!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Construct a DateTime object from the year, month, and day
+            DateTime selectedDateTime = new DateTime(year, month, day);
+
+            // Check if the selected date is in the past
+            if (selectedDateTime.Date < DateTime.Today)
+            {
+                MessageBox.Show("Past dates cannot be selected!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // Check if the selected date is already reserved
-            if (IsDateReserved(selectedDate))
+            if (IsDateReserved(selectedDateTime.ToString("yyyy-MM-dd")))
             {
                 MessageBox.Show("Event not available!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 // If the date is not reserved, proceed to the fillForms form
-                static_day = selectedDate;
+                static_day = selectedDateTime.ToString("yyyy-MM-dd");
                 fillForms fillForms = new fillForms();
-                fillForms.StartingDateTextBox.Text = selectedDate;
+                fillForms.StartingDateTextBox.Text = static_day;
                 fillForms.Show();
                 this.Hide();
             }
@@ -75,6 +94,8 @@ namespace VenueManagement
                 con.Close();
             }
         }
+
+
 
 
     }
