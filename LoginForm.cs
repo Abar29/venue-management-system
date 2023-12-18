@@ -19,7 +19,7 @@ namespace VenueManagement
 
         private void btnlogin_Click(object sender, EventArgs e)
         {
-            if (txtuser.Text == "admin" && txtpass.Text == "admin123")
+            if (txtuser.Text == "admin" && txtpass.Text == "admin")
             {
                 new adminForm().Show();
                 this.Hide();
