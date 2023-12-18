@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.8.34309.116
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34114.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VenueManagement", "VenueManagement.csproj", "{32E865A9-674D-4D66-967B-CA644C585E58}"
 EndProject
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6123569E-907E-4FDB-90C9-BD75BED3F889}
+		SolutionGuid = {7DDC4FFF-3731-42C0-A3E9-85FE0532770E}
 	EndGlobalSection
 EndGlobal
