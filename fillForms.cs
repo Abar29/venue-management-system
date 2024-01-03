@@ -27,6 +27,7 @@ namespace VenueManagement
             InitializeComponent();
             DisplayData();
             BindData();
+            Binddep();
 
 
 
@@ -79,7 +80,7 @@ namespace VenueManagement
         private void button1_Click(object sender, EventArgs e)
         {
             // Check if all necessary fields are filled
-            if (txtfname.Text != "" && txtlname.Text != "" && actevent.Text != "" && purpose.Text != "" && cmbvenue.Text != "" && deptcmb.Text != "" && txtcontact.Text != "" && startingdate.Text != "" && enddate.Text != "" && startingtime.Text != "" && endtime.Text != "")
+            if (txtfname.Text != "" && txtlname.Text != "" && actevent.Text != "" && purpose.Text != "" && cmbvenue.Text != "" && depcmb.Text != "" && txtcontact.Text != "" && startingdate.Text != "" && enddate.Text != "" && startingtime.Text != "" && endtime.Text != "")
             {
 
                 // Convert start_time and end_time to 24-hour format
@@ -131,7 +132,7 @@ namespace VenueManagement
                 cmd.Parameters.AddWithValue("@act_event", actevent.Text);
                 cmd.Parameters.AddWithValue("@nature_event", purpose.Text);
                 cmd.Parameters.AddWithValue("@venue", cmbvenue.Text);
-                cmd.Parameters.AddWithValue("@department", deptcmb.Text);
+                cmd.Parameters.AddWithValue("@department", depcmb.Text);
                 cmd.Parameters.AddWithValue("@contact", txtcontact.Text);
                 cmd.Parameters.AddWithValue("@start_date", startDate.ToString("dd-MM-yyyy"));
                 cmd.Parameters.AddWithValue("@end_date", endDate.ToString("dd-MM-yyyy"));
@@ -172,7 +173,7 @@ namespace VenueManagement
             actevent.Text = "";
             purpose.Text = "";
             cmbvenue.Text = "";
-            deptcmb.Text = "";
+            depcmb.Text = "";
             txtcontact.Text = "";
             startingdate.Text = "";
             enddate.Text = "";
@@ -199,7 +200,7 @@ namespace VenueManagement
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (txtid.Text != "" && txtfname.Text != "" && txtlname.Text != "" && actevent.Text != "" && purpose.Text != "" && cmbvenue.Text != "" && deptcmb.Text != "" && txtcontact.Text != "" && startingdate.Text != "" && enddate.Text != "" && startingtime.Text != "" && endtime.Text != "")
+            if (txtid.Text != "" && txtfname.Text != "" && txtlname.Text != "" && actevent.Text != "" && purpose.Text != "" && cmbvenue.Text != "" && depcmb.Text != "" && txtcontact.Text != "" && startingdate.Text != "" && enddate.Text != "" && startingtime.Text != "" && endtime.Text != "")
             {
                 cmd = new MySqlCommand("delete from venue_ms.re_venue where id = @id", con);
                 con.Open();
@@ -239,7 +240,7 @@ namespace VenueManagement
             actevent.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
             purpose.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
             cmbvenue.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            deptcmb.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+            depcmb.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
             txtcontact.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
 
             string startDateString = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
@@ -265,6 +266,22 @@ namespace VenueManagement
 
             startingtime.Text = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
             endtime.Text = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
+        }
+
+        private void Binddep()
+        {
+            con.Open();
+
+            MySqlCommand cmd = new MySqlCommand("select * from venue_ms.department ", con);
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                depcmb.Items.Add(dr[1].ToString());
+            }
+            dr.Close();
+            con.Close();
+
+
         }
     }
 }

@@ -43,19 +43,20 @@ namespace VenueManagement
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.searchpic = new System.Windows.Forms.PictureBox();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btn3 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn2 = new System.Windows.Forms.Button();
             this.addvenue = new System.Windows.Forms.Button();
-            this.searchpic = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchpic)).BeginInit();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
@@ -208,6 +209,17 @@ namespace VenueManagement
             this.Column12.ReadOnly = true;
             this.Column12.Width = 125;
             // 
+            // searchpic
+            // 
+            this.searchpic.Image = global::VenueManagement.Properties.Resources.icons8_reserch_64;
+            this.searchpic.Location = new System.Drawing.Point(817, 136);
+            this.searchpic.Name = "searchpic";
+            this.searchpic.Size = new System.Drawing.Size(39, 33);
+            this.searchpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.searchpic.TabIndex = 11;
+            this.searchpic.TabStop = false;
+            this.searchpic.Click += new System.EventHandler(this.searchpic_Click);
+            // 
             // txtsearch
             // 
             this.txtsearch.Font = new System.Drawing.Font("Courier New", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -227,13 +239,14 @@ namespace VenueManagement
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(401, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(402, 56);
+            this.label1.Size = new System.Drawing.Size(389, 55);
             this.label1.TabIndex = 9;
             this.label1.Text = "Welcome Admin";
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.btn3);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.btn2);
@@ -250,50 +263,13 @@ namespace VenueManagement
             this.btn3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
             this.btn3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn3.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn3.Location = new System.Drawing.Point(25, 331);
+            this.btn3.Location = new System.Drawing.Point(25, 377);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(208, 42);
             this.btn3.TabIndex = 15;
             this.btn3.Text = "Reservation";
             this.btn3.UseVisualStyleBackColor = false;
             this.btn3.Click += new System.EventHandler(this.btn3_Click);
-            // 
-            // btn2
-            // 
-            this.btn2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
-            this.btn2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn2.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn2.Location = new System.Drawing.Point(25, 267);
-            this.btn2.Name = "btn2";
-            this.btn2.Size = new System.Drawing.Size(208, 42);
-            this.btn2.TabIndex = 13;
-            this.btn2.Text = "Manage Costumers";
-            this.btn2.UseVisualStyleBackColor = false;
-            this.btn2.Click += new System.EventHandler(this.btn2_Click);
-            // 
-            // addvenue
-            // 
-            this.addvenue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
-            this.addvenue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addvenue.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addvenue.Location = new System.Drawing.Point(25, 203);
-            this.addvenue.Name = "addvenue";
-            this.addvenue.Size = new System.Drawing.Size(208, 42);
-            this.addvenue.TabIndex = 14;
-            this.addvenue.Text = "Add Venue";
-            this.addvenue.UseVisualStyleBackColor = false;
-            this.addvenue.Click += new System.EventHandler(this.addevent_Click);
-            // 
-            // searchpic
-            // 
-            this.searchpic.Image = global::VenueManagement.Properties.Resources.icons8_reserch_64;
-            this.searchpic.Location = new System.Drawing.Point(817, 136);
-            this.searchpic.Name = "searchpic";
-            this.searchpic.Size = new System.Drawing.Size(39, 33);
-            this.searchpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.searchpic.TabIndex = 11;
-            this.searchpic.TabStop = false;
-            this.searchpic.Click += new System.EventHandler(this.searchpic_Click);
             // 
             // pictureBox1
             // 
@@ -306,6 +282,32 @@ namespace VenueManagement
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
+            // btn2
+            // 
+            this.btn2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
+            this.btn2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn2.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn2.Location = new System.Drawing.Point(25, 329);
+            this.btn2.Name = "btn2";
+            this.btn2.Size = new System.Drawing.Size(208, 42);
+            this.btn2.TabIndex = 13;
+            this.btn2.Text = "Manage Costumers";
+            this.btn2.UseVisualStyleBackColor = false;
+            this.btn2.Click += new System.EventHandler(this.btn2_Click);
+            // 
+            // addvenue
+            // 
+            this.addvenue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
+            this.addvenue.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addvenue.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addvenue.Location = new System.Drawing.Point(25, 224);
+            this.addvenue.Name = "addvenue";
+            this.addvenue.Size = new System.Drawing.Size(208, 42);
+            this.addvenue.TabIndex = 14;
+            this.addvenue.Text = "Add Venue";
+            this.addvenue.UseVisualStyleBackColor = false;
+            this.addvenue.Click += new System.EventHandler(this.addevent_Click);
+            // 
             // pictureBox4
             // 
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -317,6 +319,19 @@ namespace VenueManagement
             this.pictureBox4.TabIndex = 6;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(25, 278);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(208, 42);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Add Department";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // adminForm
             // 
@@ -334,8 +349,8 @@ namespace VenueManagement
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchpic)).EndInit();
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
@@ -367,6 +382,7 @@ namespace VenueManagement
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.Button button1;
     }
 }
 

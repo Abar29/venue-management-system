@@ -96,5 +96,13 @@ namespace VenueManagement
             fillForms.Show();
             this.Hide();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            depForm depForm = new depForm();
+            depForm.Show();
+            this.Close();
+        }
     }
 }

@@ -11,28 +11,37 @@ using MySql.Data.MySqlClient;
 
 namespace VenueManagement
 {
-    public partial class addvenuecs : Form
+    public partial class depForm : Form
     {
         MySqlConnection con = new MySqlConnection("datasource=localhost;port=3306;username=root;password=;");
         MySqlCommand cmd;
         MySqlDataAdapter adapt;
 
 
-        public addvenuecs()
+        public depForm()
         {
             InitializeComponent();
             DisplayData();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void txtdep_TextChanged(object sender, EventArgs e)
         {
-            if ( txtvenue.Text != "")
+
+        }
+
+        private void btnsave_Click(object sender, EventArgs e)
+        {
+
+            // if the record is already in the database, it says 'Department already exists'
+            // if the record is not in the database, it says 'Event Successfully Added'
+
+            if (txtdep.Text != "")
             {
-                cmd = new MySqlCommand("insert into venue_ms.venue_table (id,venue) values (@id,@venue)", con);
+                cmd = new MySqlCommand("insert into venue_ms.department (id,dep) values (@id,@dep)", con);
                 con.Open();
                 cmd.Parameters.AddWithValue("@id", "");
-                cmd.Parameters.AddWithValue("@venue", txtvenue.Text);
-            
+                cmd.Parameters.AddWithValue("@dep", txtdep.Text);
+
                 cmd.ExecuteNonQuery();
                 con.Close();
                 MessageBox.Show("Event Successfully Added", "INSERT", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -48,14 +57,14 @@ namespace VenueManagement
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             txtid.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            txtvenue.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            txtdep.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
         }
 
         private void DisplayData()
         {
             con.Open();
             DataTable dt = new DataTable();
-            adapt = new MySqlDataAdapter("select * from venue_ms.venue_table", con);
+            adapt = new MySqlDataAdapter("select * from venue_ms.department", con);
             adapt.Fill(dt);
             dataGridView1.DataSource = dt;
             con.Close();
@@ -64,27 +73,15 @@ namespace VenueManagement
         private void ClearData()
         {
             txtid.Text = "";
-            txtvenue.Text = "";
+            txtdep.Text = "";
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void pictureBox4_Click(object sender, EventArgs e)
         {
-            if (txtid.Text != "" && txtvenue.Text != "")
-            {
-                cmd = new MySqlCommand("delete from venue_ms.venue_table where id = @id", con);
-                con.Open();
-                cmd.Parameters.AddWithValue("@id", txtid.Text);
-
-                cmd.ExecuteNonQuery();
-                con.Close();
-                MessageBox.Show("Record Successfully Deleted", "DELETE", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DisplayData();
-                ClearData();
-            }
-            else
-            {
-                MessageBox.Show("Select the record you want to Delete", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            // if i click this picturebox, it will back into the adminForm
+            new adminForm().Show();
+            this.Hide();
         }
     }
 }
+
