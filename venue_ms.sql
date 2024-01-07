@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2023 at 07:29 AM
+-- Generation Time: Dec 19, 2023 at 03:37 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `venue_ms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+  `id` int(100) NOT NULL,
+  `dep` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`id`, `dep`) VALUES
+(1, 'COE'),
+(2, 'COG');
 
 -- --------------------------------------------------------
 
@@ -47,9 +66,9 @@ CREATE TABLE `re_venue` (
 --
 
 INSERT INTO `re_venue` (`id`, `fname`, `lname`, `act_event`, `nature_event`, `venue`, `department`, `contact`, `start_date`, `end_date`, `start_time`, `end_time`) VALUES
-(19, 'dasd', 'safasdsad', 'sadfasd', 'asdasdasd', 'basketball', 'ffgfdf', 246324, '29/11/2023', '27/11/2023', '10:00:00 am', '5:00:00 pm'),
-(21, 'asdasd', 'asdasdasd', 'asdasdas', 'asdsad', 'Inner court', 'asdasd', 80769869, '29/11/2023', '27/11/2023', '6:00:00 pm', '10:30:00 pm'),
-(22, 'asdasd', 'sdasdsd', 'dfgasdf', 'sdasd', 'Inner court', 'asdasd', 63453425, '29/11/2023', '27/11/2023', '11:00:00 pm', '12:00:00 am');
+(31, 'sda', 'dgasdasd', 'sdasd', 'sdsds', 'downtown', 'COE', 6734576345, '20-12-2023', '18-12-2023', '12:00:00 am', '12:00:00 am'),
+(33, 'fgherthtg', 'getgertg', 'rgfwfg', 'sgrtert', 'downtown', 'COG', 75673468, '22-12-2023', '26-12-2023', '5:30:00 pm', '10:00:00 pm'),
+(34, 'hyerteh', 'hetryhtry', 'brtyetrh', 'vthetrh', 'downtown', 'rth', 63546754, '22-12-2023', '26-12-2023', '10:01:00 pm', '11:00:00 pm');
 
 -- --------------------------------------------------------
 
@@ -77,6 +96,12 @@ INSERT INTO `venue_table` (`id`, `venue`) VALUES
 --
 
 --
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `re_venue`
 --
 ALTER TABLE `re_venue`
@@ -93,10 +118,16 @@ ALTER TABLE `venue_table`
 --
 
 --
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `re_venue`
 --
 ALTER TABLE `re_venue`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `venue_table`
