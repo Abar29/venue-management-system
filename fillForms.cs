@@ -286,11 +286,43 @@ namespace VenueManagement
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (txtlname.Text != "" && txtfname.Text != "" && actevent.Text != "" && purpose.Text != "" && cmbvenue.Text != "" && depcmb.Text != "" && txtcontact.Text != "" && startingdate.Text != "" && enddate.Text != "" && startingtime.Text != "" && endtime.Text != "")
+            if (txtlname.Text != "" && txtfname.Text != "" && actevent.Text != "" && purpose.Text != "" && cmbvenue.Text != "" && depcmb.Text != "" && txtcontact.Text != "" && startingtime.Text != "" && endtime.Text != "")
             {
-                cmd = new MySqlCommand("UPDATE venue_ms.re_venue SET lname = @lname, fname = @fname, act_event = @act_event, nature_event = @nature_event, venue = @venue, department = @department, contact = @contact, start_date = @start_date, end_date = @end_date, start_time = @start_time, end_time = @end_time WHERE id = @id", con);
                 con.Open();
-                cmd.Parameters.AddWithValue("@id", txtid.Text); // Replace YOUR_ID_VALUE_HERE with the actual value of the id column
+                MySqlCommand cmdCheck = new MySqlCommand("SELECT * FROM venue_ms.re_venue WHERE id != @id AND venue = @venue AND ((start_date <= @start_date AND end_date >= @start_date) OR (start_date <= @end_date AND end_date >= @end_date) OR (start_date >= @start_date AND end_date <= @end_date)) AND ((TIME(start_time) <= TIME(@start_time) AND TIME(end_time) > TIME(@start_time)) OR (TIME(start_time) < TIME(@end_time) AND TIME(end_time) >= TIME(@end_time)) OR (TIME(start_time) >= TIME(@start_time) AND TIME(end_time) <= TIME(@end_time)) OR (TIME(start_time) <= TIME(@start_time) AND TIME(end_time) >= TIME(@end_time)))", con);
+                cmdCheck.Parameters.AddWithValue("@id", txtid.Text);
+                cmdCheck.Parameters.AddWithValue("@venue", cmbvenue.Text);
+
+                // Parse the text from the TextBox controls into DateTime objects
+                DateTime startDate;
+                if (!DateTime.TryParseExact(startingdate.Text, "MM-dd-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate))
+                {
+                    MessageBox.Show("Starting date is not in the correct format. Please enter the date in the format 'MM-dd-yyyy'.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Get the end date from the DateTimePicker control
+                DateTime endDate = enddate.Value;
+
+                cmdCheck.Parameters.AddWithValue("@start_date", startDate.ToString("dd-MM-yyyy"));
+                cmdCheck.Parameters.AddWithValue("@end_date", endDate.ToString("dd-MM-yyyy"));
+                cmdCheck.Parameters.AddWithValue("@start_time", startingtime.Text);
+                cmdCheck.Parameters.AddWithValue("@end_time", endtime.Text);
+
+                MySqlDataReader drCheck;
+                using (drCheck = cmdCheck.ExecuteReader())
+                {
+                    if (drCheck.HasRows)
+                    {
+                        MessageBox.Show("A reservation already exists with the same venue, date, and time.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        con.Close();
+                        return;
+                    }
+                }
+                drCheck.Close();
+
+                cmd = new MySqlCommand("UPDATE venue_ms.re_venue SET lname = @lname, fname = @fname, act_event = @act_event, nature_event = @nature_event, venue = @venue, department = @department, contact = @contact, start_date = @start_date, end_date = @end_date, start_time = @start_time, end_time = @end_time WHERE id = @id", con);
+                cmd.Parameters.AddWithValue("@id", txtid.Text);
                 cmd.Parameters.AddWithValue("@lname", txtlname.Text);
                 cmd.Parameters.AddWithValue("@fname", txtfname.Text);
                 cmd.Parameters.AddWithValue("@act_event", actevent.Text);
@@ -298,8 +330,8 @@ namespace VenueManagement
                 cmd.Parameters.AddWithValue("@venue", cmbvenue.Text);
                 cmd.Parameters.AddWithValue("@department", depcmb.Text);
                 cmd.Parameters.AddWithValue("@contact", txtcontact.Text);
-                cmd.Parameters.AddWithValue("@start_date", startingdate.Text);
-                cmd.Parameters.AddWithValue("@end_date", enddate.Text);
+                cmd.Parameters.AddWithValue("@start_date", startDate.ToString("dd-MM-yyyy"));
+                cmd.Parameters.AddWithValue("@end_date", endDate.ToString("dd-MM-yyyy"));
                 cmd.Parameters.AddWithValue("@start_time", startingtime.Text);
                 cmd.Parameters.AddWithValue("@end_time", endtime.Text);
                 cmd.ExecuteNonQuery();
