@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Globalization;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace VenueManagement
 {
@@ -282,6 +283,47 @@ namespace VenueManagement
             con.Close();
 
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (txtlname.Text != "" && txtfname.Text != "" && actevent.Text != "" && purpose.Text != "" && cmbvenue.Text != "" && depcmb.Text != "" && txtcontact.Text != "" && startingdate.Text != "" && enddate.Text != "" && startingtime.Text != "" && endtime.Text != "")
+            {
+                DateTime startDate;
+                DateTime endDate;
+
+                if (DateTime.TryParseExact(startingdate.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate) &&
+                    DateTime.TryParseExact(enddate.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate))
+                {
+                    cmd = new MySqlCommand("UPDATE venue_ms.re_venue SET lname = @lname, fname = @fname, act_event = @act_event, nature_event = @nature_event, venue = @venue, department = @department, contact = @contact, start_date = @start_date, end_date = @end_date, start_time = @start_time, end_time = @end_time WHERE id = @id", con);
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@id", txtid.Text); // Replace YOUR_ID_VALUE_HERE with the actual value of the id column
+                    cmd.Parameters.AddWithValue("@lname", txtlname.Text);
+                    cmd.Parameters.AddWithValue("@fname", txtfname.Text);
+                    cmd.Parameters.AddWithValue("@act_event", actevent.Text);
+                    cmd.Parameters.AddWithValue("@nature_event", purpose.Text);
+                    cmd.Parameters.AddWithValue("@venue", cmbvenue.Text);
+                    cmd.Parameters.AddWithValue("@department", depcmb.Text);
+                    cmd.Parameters.AddWithValue("@contact", txtcontact.Text);
+                    cmd.Parameters.AddWithValue("@start_date", startDate);
+                    cmd.Parameters.AddWithValue("@end_date", endDate.ToString("yyyy-MM-dd"));  // Format the end date as 'yyyy-MM-dd'
+                    cmd.Parameters.AddWithValue("@start_time", startingtime.Text);
+                    cmd.Parameters.AddWithValue("@end_time", endtime.Text);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Record Successfully Updated", "UPDATE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    con.Close();
+                    DisplayData();
+                    ClearData();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid date format. Please enter dates in the format dd-MM-yyyy", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select the record you want to Update", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
