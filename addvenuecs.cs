@@ -86,5 +86,11 @@ namespace VenueManagement
                 MessageBox.Show("Select the record you want to Delete", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            new adminForm().Show();
+            this.Hide();
+        }
     }
 }
