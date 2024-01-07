@@ -246,24 +246,27 @@ namespace VenueManagement
 
             string startDateString = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
             DateTime startDate;
-            if (!DateTime.TryParseExact(startDateString, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate))
+            if (DateTime.TryParse(startDateString, out startDate))
             {
-                // Handle the case where startDateString is not in the "dd-MM-yyyy" format
-                MessageBox.Show("Start date is not in the correct format. Please enter the date in the format 'yyyy-MM-dd'.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                startingdate.Text = startDate.ToString("dd-MM-yyyy");
+            }
+            else
+            {
+                MessageBox.Show("Start date is not in a valid format.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            startingdate.Text = startDate.ToString("dd-MM-yyyy"); // Use Text property instead of Value
-
 
             string endDateString = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
             DateTime endDate;
-            if (!DateTime.TryParseExact(endDateString, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate))
+            if (DateTime.TryParse(endDateString, out endDate))
             {
-                // Handle the case where endDateString is not in the "dd-MM-yyyy" format
-                MessageBox.Show("End date is not in the correct format. Please enter the date in the format 'yyyy-MM-dd'.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                enddate.Text = endDate.ToString("dd-MM-yyyy");
+            }
+            else
+            {
+                MessageBox.Show("End date is not in a valid format.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            enddate.Value = endDate; // Use Value property instead of Text
 
             startingtime.Text = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
             endtime.Text = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
@@ -289,36 +292,51 @@ namespace VenueManagement
         {
             if (txtlname.Text != "" && txtfname.Text != "" && actevent.Text != "" && purpose.Text != "" && cmbvenue.Text != "" && depcmb.Text != "" && txtcontact.Text != "" && startingdate.Text != "" && enddate.Text != "" && startingtime.Text != "" && endtime.Text != "")
             {
-                DateTime startDate;
-                DateTime endDate;
+                DateTime startDate, endDate, startTime, endTime;
 
-                if (DateTime.TryParseExact(startingdate.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate) &&
-                    DateTime.TryParseExact(enddate.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate))
+                if (!DateTime.TryParseExact(startingdate.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate))
                 {
-                    cmd = new MySqlCommand("UPDATE venue_ms.re_venue SET lname = @lname, fname = @fname, act_event = @act_event, nature_event = @nature_event, venue = @venue, department = @department, contact = @contact, start_date = @start_date, end_date = @end_date, start_time = @start_time, end_time = @end_time WHERE id = @id", con);
-                    con.Open();
-                    cmd.Parameters.AddWithValue("@id", txtid.Text); // Replace YOUR_ID_VALUE_HERE with the actual value of the id column
-                    cmd.Parameters.AddWithValue("@lname", txtlname.Text);
-                    cmd.Parameters.AddWithValue("@fname", txtfname.Text);
-                    cmd.Parameters.AddWithValue("@act_event", actevent.Text);
-                    cmd.Parameters.AddWithValue("@nature_event", purpose.Text);
-                    cmd.Parameters.AddWithValue("@venue", cmbvenue.Text);
-                    cmd.Parameters.AddWithValue("@department", depcmb.Text);
-                    cmd.Parameters.AddWithValue("@contact", txtcontact.Text);
-                    cmd.Parameters.AddWithValue("@start_date", startDate);
-                    cmd.Parameters.AddWithValue("@end_date", endDate.ToString("yyyy-MM-dd"));  // Format the end date as 'yyyy-MM-dd'
-                    cmd.Parameters.AddWithValue("@start_time", startingtime.Text);
-                    cmd.Parameters.AddWithValue("@end_time", endtime.Text);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Record Successfully Updated", "UPDATE", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    con.Close();
-                    DisplayData();
-                    ClearData();
+                    MessageBox.Show("Starting date is not in the correct format. Please enter the date in the format 'dd-MM-yyyy'.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                else
+
+                if (!DateTime.TryParseExact(enddate.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate))
                 {
-                    MessageBox.Show("Invalid date format. Please enter dates in the format dd-MM-yyyy", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("End date is not in the correct format. Please enter the date in the format 'dd-MM-yyyy'.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
+
+                if (!DateTime.TryParseExact(startingtime.Text, "h:mm:ss tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out startTime))
+                {
+                    MessageBox.Show("Starting time is not in the correct format. Please enter the time in the format 'h:mm:ss AM/PM'.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!DateTime.TryParseExact(endtime.Text, "h:mm:ss tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out endTime))
+                {
+                    MessageBox.Show("End time is not in the correct format. Please enter the time in the format 'h:mm:ss AM/PM'.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                cmd = new MySqlCommand("UPDATE venue_ms.re_venue SET lname = @lname, fname = @fname, act_event = @act_event, nature_event = @nature_event, venue = @venue, department = @department, contact = @contact, start_date = @start_date, end_date = @end_date, start_time = @start_time, end_time = @end_time WHERE id = @id", con);
+                con.Open();
+                cmd.Parameters.AddWithValue("@id", txtid.Text);
+                cmd.Parameters.AddWithValue("@lname", txtlname.Text);
+                cmd.Parameters.AddWithValue("@fname", txtfname.Text);
+                cmd.Parameters.AddWithValue("@act_event", actevent.Text);
+                cmd.Parameters.AddWithValue("@nature_event", purpose.Text);
+                cmd.Parameters.AddWithValue("@venue", cmbvenue.Text);
+                cmd.Parameters.AddWithValue("@department", depcmb.Text);
+                cmd.Parameters.AddWithValue("@contact", txtcontact.Text);
+                cmd.Parameters.AddWithValue("@start_date", startDate.ToString("dd-MM-yyyy"));
+                cmd.Parameters.AddWithValue("@end_date", endDate.ToString("dd-MM-yyyy"));
+                cmd.Parameters.AddWithValue("@start_time", startTime.ToString("h:mm:ss tt"));
+                cmd.Parameters.AddWithValue("@end_time", endTime.ToString("h:mm:ss tt"));
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Record Successfully Updated", "UPDATE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                con.Close();
+                DisplayData();
+                ClearData();
             }
             else
             {
