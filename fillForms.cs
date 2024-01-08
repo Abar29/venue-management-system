@@ -113,7 +113,7 @@ namespace VenueManagement
         {
             adminForm adminForm = new adminForm();
             adminForm.Show();
-            this.Hide();
+            this.Close();
 
         }
 
@@ -393,14 +393,23 @@ namespace VenueManagement
                 cmdCheck.Parameters.AddWithValue("@id", txtid.Text);
                 cmdCheck.Parameters.AddWithValue("@venue", cmbvenue.Text);
 
-                // Parse the text from the TextBox controls into DateTime objects
                 DateTime startDate;
-                if (!DateTime.TryParseExact(startingdate.Text, "MM-dd-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate))
+                string dateFormat = "MM-dd-yyyy";
+
+                // Convert the startingdate.Text to DateTime
+                DateTime temp;
+                if (DateTime.TryParse(startingdate.Text, out temp))
                 {
-                    MessageBox.Show("Starting date is not in the correct format. Please enter the date in the format 'MM-dd-yyyy'.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    // If the conversion is successful, format the date as "MM-dd-yyyy"
+                    startingdate.Text = temp.ToString(dateFormat);
                 }
 
+                // Validate the startingdate.Text format before parsing
+                if (!DateTime.TryParseExact(startingdate.Text, dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate))
+                {
+                    MessageBox.Show($"Starting date is not in the correct format. Please enter the date in the format '{dateFormat}'.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 // Get the end date from the DateTimePicker control
                 DateTime endDate = enddate.Value;
 
