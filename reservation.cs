@@ -114,7 +114,7 @@ namespace VenueManagement
         {
             // Hide the current form (reservation form)
             this.Hide();
-            fillForms fillForms = new fillForms();
+            fillForms fillForms = fillForms.Instance;
             fillForms.Show();
         }
 

@@ -92,7 +92,7 @@ namespace VenueManagement
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            fillForms fillForms = new fillForms();
+            fillForms fillForms = fillForms.Instance;
             fillForms.Show();
             this.Hide();
         }
