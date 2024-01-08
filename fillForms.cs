@@ -185,16 +185,16 @@ namespace VenueManagement
                 if (
                     !DateTime.TryParseExact(
                         startingdate.Text,
-                        "dd/MM/yyyy",
+                        "dd-MM-yyyy",
                         CultureInfo.InvariantCulture,
                         DateTimeStyles.None,
                         out startDate
                     )
                 )
                 {
-                    // Handle the case where startingdate.Text is not in the "dd/MM/yyyy" format
+                    // Handle the case where startingdate.Text is not in the "dd-MM-yyyy" format
                     MessageBox.Show(
-                        "Starting date is not in the correct format. Please enter the date in the format 'dd/MM/yyyy'.",
+                        "Starting date is not in the correct format. Please enter the date in the format 'dd-MM-yyyy'.",
                         "ERROR",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error
@@ -523,7 +523,7 @@ namespace VenueManagement
                 cmdCheck.Parameters.AddWithValue("@venue", cmbvenue.Text);
 
                 DateTime startDate;
-                string dateFormat = "MM-dd-yyyy";
+                string dateFormat = "dd-MM-yyyy";
 
                 // Validate the startingdate.Text format before parsing
                 if (
