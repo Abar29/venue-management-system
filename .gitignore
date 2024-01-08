@@ -5,3 +5,5 @@
 *.exe
 *.pdb
 *.cache
+*.exe
+*.pdb
