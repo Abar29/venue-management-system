@@ -276,10 +276,7 @@ namespace VenueManagement
         {
             con.Open();
             DataTable dt = new DataTable();
-            adapt = new MySqlDataAdapter(
-                "SELECT id, fname, lname, act_event, nature_event, venue, department, contact, STR_TO_DATE(start_date, '%d-%m-%Y') as start_date, STR_TO_DATE(end_date, '%d-%m-%Y') as end_date, start_time, end_time FROM venue_ms.re_venue",
-                con
-            );
+            adapt = new MySqlDataAdapter("select * from venue_ms.re_venue", con);
             adapt.Fill(dt);
             dataGridView1.DataSource = dt;
             con.Close();
