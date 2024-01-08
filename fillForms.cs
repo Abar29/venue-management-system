@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Globalization;
 using System.Runtime.InteropServices.ComTypes;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace VenueManagement
 {
@@ -14,6 +16,20 @@ namespace VenueManagement
         MySqlCommand cmd;
         MySqlDataAdapter adapt;
         MySqlDataReader dr;
+
+        private string txtIdValue;
+        private string txtFnameValue;
+        private string txtLnameValue;
+        private string actEventValue;
+        private string purposeValue;
+        private string cmbVenueValue;
+        private string depCmbValue;
+        private string txtContactValue;
+        private string startingDateValue;
+        private string endDateValue;
+        private string startingTimeValue;
+        private string endTimeValue;
+
 
 
         public TextBox StartingDateTextBox
@@ -29,10 +45,24 @@ namespace VenueManagement
             DisplayData();
             BindData();
             Binddep();
+           
+            button2.Visible = false;
+
+            UpdateStoredValues();
 
 
 
         }
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+         (
+         int nLeftRect,
+         int nTopRect,
+         int nRightRect,
+         int nWidthEllipse,
+         int nHeigthEllipse
+,
+         int v);
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -41,6 +71,15 @@ namespace VenueManagement
 
         private void fillForms_Load(object sender, EventArgs e)
         {
+
+            panel1.Location = new Point(
+            this.ClientSize.Width / 2 - panel1.Size.Width / 2,
+            this.ClientSize.Height / 2 - panel1.Size.Height / 2);
+            panel1.Anchor = AnchorStyles.None;
+
+            panel1.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, panel1.Width,
+                panel1.Height, 30, 30));
+
             // Assuming UserControlDays.static_day, reservation.static_month, and reservation.static_year are strings
             if (int.TryParse(UserControlDays.static_day, out int day))
             {
@@ -226,46 +265,107 @@ namespace VenueManagement
 
         private void startingdate_MouseClick(object sender, MouseEventArgs e)
         {
-
+            // Create an instance of the reservation form
             reservation reservationForm = new reservation();
+
+            // Set the owner of the reservation form to the current form
+            reservationForm.Owner = this;
+
+            // Access the PictureBox4 and PicBack properties from the reservation form
+            PictureBox pictureBox4 = reservationForm.PictureBox4;
+            PictureBox picBack = reservationForm.PicBack;
+
+            // Set the visibility of PictureBox4 to false
+            pictureBox4.Visible = false;
+
+            // Set the visibility of PicBack to true
+            picBack.Visible = true;
+
+            // Wire up an event handler for the PicBack click event
+            picBack.Click += (s, ev) => NavigateBack();
+
+            // Show the reservation form
             reservationForm.Show();
 
+            // Hide the current form
             this.Hide();
+        }
+        // New method to navigate back to the fillForms form
+        private void NavigateBack()
+        {
+            // Show the current form
+            this.Show();
+
+            // Update stored values
+            UpdateStoredValues();
+        }
+
+        private void UpdateStoredValues()
+        {
+            txtIdValue = txtid.Text;
+            txtFnameValue = txtfname.Text;
+            txtLnameValue = txtlname.Text;
+            actEventValue = actevent.Text;
+            purposeValue = purpose.Text;
+            cmbVenueValue = cmbvenue.Text;
+            depCmbValue = depcmb.Text;
+            txtContactValue = txtcontact.Text;
+            startingDateValue = startingdate.Text;
+            endDateValue = enddate.Text;
+            startingTimeValue = startingtime.Text;
+            endTimeValue = endtime.Text;
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtid.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            txtfname.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            txtlname.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            actevent.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            purpose.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-            cmbvenue.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            depcmb.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-            txtcontact.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-
-            if (DateTime.TryParse(dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString(), out DateTime startDate))
+            // Check if a row is selected
+            if (e.RowIndex >= 0)
             {
-                startingdate.Text = startDate.ToString("dd-MM-yyyy"); // Use Text property instead of Value
+                // Populate data from the selected row to your form fields
+                txtid.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                txtfname.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                txtlname.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                actevent.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                purpose.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                cmbvenue.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                depcmb.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+                txtcontact.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
+
+                if (DateTime.TryParse(dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString(), out DateTime startDate))
+                {
+                    startingdate.Text = startDate.ToString("dd-MM-yyyy");
+                }
+                else
+                {
+                    MessageBox.Show("Start date is not in the correct format. Please enter a valid date.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (DateTime.TryParse(dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString(), out DateTime endDate))
+                {
+                    enddate.Text = endDate.ToString("dd-MM-yyyy");
+                }
+                else
+                {
+                    MessageBox.Show("End date is not in the correct format. Please enter a valid date.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                startingtime.Text = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
+                endtime.Text = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
+
+                // Hide the "Save" button
+                button1.Visible = false;
+
+                // Show the "Update" button
+                button2.Visible = true;
             }
             else
             {
-                MessageBox.Show("Start date is not in the correct format. Please enter a valid date.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                // If no row is selected, show the "Save" button and hide the "Update" button
+                button1.Visible = true;
+                button2.Visible = false;
             }
-
-            if (DateTime.TryParse(dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString(), out DateTime endDate))
-            {
-                enddate.Text = endDate.ToString("dd-MM-yyyy"); // Use Text property instead of Value
-            }
-            else
-            {
-                MessageBox.Show("End date is not in the correct format. Please enter a valid date.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            startingtime.Text = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
-            endtime.Text = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
         }
 
         private void Binddep()
@@ -339,6 +439,10 @@ namespace VenueManagement
                 con.Close();
                 DisplayData();
                 ClearData();
+
+                // Set the visibility of the "Save" button to true after successful update
+                button1.Visible = true;// Set the visibility of the "Update" button to false after successful update
+                button2.Visible = false;
             }
             else
             {

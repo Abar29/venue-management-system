@@ -15,16 +15,16 @@ namespace VenueManagement
     
     public partial class reservation : Form
     {
-        
+        public PictureBox PictureBox4 { get { return pictureBox4; } }
+        public PictureBox PicBack { get { return picback; } }
+
         int month, year;
         public static int static_month, static_year;
         public reservation()
         {
             InitializeComponent();
-            picback.Visible = false;
-           
-
-    }
+            
+        }
 
         private void reservation_Load(object sender, EventArgs e)
         {
@@ -101,11 +101,21 @@ namespace VenueManagement
             }
         }
 
+       
+
         private void pictureBox4_Click(object sender, EventArgs e)
         {
             adminForm adminForm = new adminForm();
             adminForm.Show();
             this.Hide();
+        }
+
+        private void picback_Click_1(object sender, EventArgs e)
+        {
+            // Hide the current form (reservation form)
+            this.Hide();
+            fillForms fillForms = new fillForms();
+            fillForms.Show();
         }
 
         private void btnnext_Click(object sender, EventArgs e)
@@ -139,5 +149,9 @@ namespace VenueManagement
 
             }
         }
+
+        
+
+
     }
 }

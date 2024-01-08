@@ -158,7 +158,7 @@ namespace VenueManagement
             // 
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox4.Image = global::VenueManagement.Properties.Resources.icons8_x_50;
-            this.pictureBox4.Location = new System.Drawing.Point(1157, -3);
+            this.pictureBox4.Location = new System.Drawing.Point(1157, 0);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(46, 37);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -170,12 +170,13 @@ namespace VenueManagement
             // 
             this.picback.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picback.Image = global::VenueManagement.Properties.Resources.back;
-            this.picback.Location = new System.Drawing.Point(1105, -3);
+            this.picback.Location = new System.Drawing.Point(1157, 0);
             this.picback.Name = "picback";
             this.picback.Size = new System.Drawing.Size(46, 37);
             this.picback.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picback.TabIndex = 12;
             this.picback.TabStop = false;
+            this.picback.Click += new System.EventHandler(this.picback_Click_1);
             // 
             // reservation
             // 
@@ -183,7 +184,6 @@ namespace VenueManagement
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1202, 855);
-            this.Controls.Add(this.picback);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.lbdate);
             this.Controls.Add(this.btnnext);
@@ -196,6 +196,7 @@ namespace VenueManagement
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.daycontainer);
+            this.Controls.Add(this.picback);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "reservation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -112,7 +112,7 @@ namespace VenueManagement
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(829, 283);
+            this.button3.Location = new System.Drawing.Point(829, 179);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(101, 46);
@@ -124,7 +124,7 @@ namespace VenueManagement
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(829, 199);
+            this.button2.Location = new System.Drawing.Point(829, 103);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(101, 46);
@@ -136,7 +136,7 @@ namespace VenueManagement
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(829, 116);
+            this.button1.Location = new System.Drawing.Point(829, 103);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(101, 46);
