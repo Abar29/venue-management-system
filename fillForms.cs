@@ -50,6 +50,9 @@ namespace VenueManagement
             button2.Visible = false;
 
             UpdateStoredValues();
+
+            // Attach the CloseUp event handler
+            enddate.CloseUp += new EventHandler(enddate_CloseUp);
         }
 
         // Public static property to get the instance
@@ -119,7 +122,45 @@ namespace VenueManagement
 
         private void startingdate_TextChanged(object sender, EventArgs e) { }
 
-        private void enddate_ValueChanged(object sender, EventArgs e) { }
+        private void enddate_ValueChanged(object sender, EventArgs e)
+        {
+            if (DateTime.TryParseExact(startingdate.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startDate))
+            {
+                if (enddate.Value.Date < startDate.Date)
+                {
+                    MessageBox.Show("End date cannot be earlier than start date.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    enddate.Value = startDate;
+                }
+                else
+                {
+                    endDateValue = enddate.Value.ToString("dd-MM-yyyy"); // Update the endDateValue
+                }
+            }
+            else
+            {
+                MessageBox.Show("Start date is not in the correct format. Please enter a valid date.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void enddate_CloseUp(object sender, EventArgs e)
+        {
+            if (DateTime.TryParseExact(startingdate.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startDate))
+            {
+                if (enddate.Value.Date < startDate.Date)
+                {
+                    MessageBox.Show("End date cannot be earlier than start date.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    enddate.Value = startDate;
+                }
+                else
+                {
+                    endDateValue = enddate.Value.ToString("dd-MM-yyyy"); // Update the endDateValue
+                }
+            }
+            else
+            {
+                MessageBox.Show("Start date is not in the correct format. Please enter a valid date.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
