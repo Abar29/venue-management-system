@@ -427,9 +427,12 @@ namespace VenueManagement
                 txtcontact.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
 
                 if (
-                    DateTime.TryParse(
-                        dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString(),
-                        out DateTime startDate
+                DateTime.TryParseExact(
+                dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString(),
+                "dd-MM-yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out DateTime startDate
                     )
                 )
                 {
@@ -447,13 +450,18 @@ namespace VenueManagement
                 }
 
                 if (
-                    DateTime.TryParse(
+                    DateTime.TryParseExact(
                         dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString(),
+                        "dd-MM-yyyy",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
                         out DateTime endDate
                     )
                 )
                 {
-                    enddate.Text = endDate.ToString("dd-MM-yyyy");
+                    enddate.Format = DateTimePickerFormat.Custom;
+                    enddate.CustomFormat = "dd-MM-yyyy";
+                    enddate.Value = endDate;
                 }
                 else
                 {
