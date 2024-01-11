@@ -48,7 +48,7 @@ namespace VenueManagement
             // 
             // daycontainer
             // 
-            this.daycontainer.BackColor = System.Drawing.Color.White;
+            this.daycontainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
             this.daycontainer.Location = new System.Drawing.Point(184, 125);
             this.daycontainer.Name = "daycontainer";
             this.daycontainer.Size = new System.Drawing.Size(839, 669);
@@ -158,7 +158,7 @@ namespace VenueManagement
             // 
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox4.Image = global::VenueManagement.Properties.Resources.icons8_x_50;
-            this.pictureBox4.Location = new System.Drawing.Point(1157, 0);
+            this.pictureBox4.Location = new System.Drawing.Point(1157, -5);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(46, 37);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -170,7 +170,7 @@ namespace VenueManagement
             // 
             this.picback.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picback.Image = global::VenueManagement.Properties.Resources.back;
-            this.picback.Location = new System.Drawing.Point(1157, 0);
+            this.picback.Location = new System.Drawing.Point(1157, -5);
             this.picback.Name = "picback";
             this.picback.Size = new System.Drawing.Size(46, 37);
             this.picback.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -182,7 +182,7 @@ namespace VenueManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
+            this.BackColor = System.Drawing.Color.LightSkyBlue;
             this.ClientSize = new System.Drawing.Size(1202, 855);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.lbdate);

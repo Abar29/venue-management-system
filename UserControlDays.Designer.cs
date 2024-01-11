@@ -37,7 +37,7 @@ namespace VenueManagement
             this.lbldays.AutoSize = true;
             this.lbldays.Location = new System.Drawing.Point(29, 33);
             this.lbldays.Name = "lbldays";
-            this.lbldays.Size = new System.Drawing.Size(24, 17);
+            this.lbldays.Size = new System.Drawing.Size(21, 16);
             this.lbldays.TabIndex = 0;
             this.lbldays.Text = "00";
             // 
@@ -45,7 +45,7 @@ namespace VenueManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lbldays);
             this.Name = "UserControlDays";
             this.Size = new System.Drawing.Size(113, 100);

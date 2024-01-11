@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace VenueManagement
 {
@@ -53,6 +54,8 @@ namespace VenueManagement
 
             // Attach the CloseUp event handler
             enddate.CloseUp += new EventHandler(enddate_CloseUp);
+
+            txtcontact.MaxLength = 11;
         }
 
         // Public static property to get the instance
@@ -75,6 +78,7 @@ namespace VenueManagement
 
             // Set the Text property of the TextBox
             startingdate.Text = dateString;
+            
         }
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -185,7 +189,21 @@ namespace VenueManagement
                 && startingtime.Text != ""
                 && endtime.Text != ""
             )
+
             {
+                // Add validation for Philippine phone number
+                Regex phoneNumpattern = new Regex(@"^09\d{9}$");
+                if (!phoneNumpattern.IsMatch(txtcontact.Text))
+                {
+                    MessageBox.Show(
+                        "Invalid phone number. Please enter a valid Philippine phone number starting with 09 and consisting of 11 numbers.",
+                        "ERROR",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                    return;
+                }
+
                 // Convert start_time and end_time to 24-hour format
                 DateTime startTime,
                     endTime;
@@ -222,6 +240,7 @@ namespace VenueManagement
                     con
                 );
                 cmdCheck.Parameters.AddWithValue("@venue", cmbvenue.Text);
+                // parse the startingdate.Text to DateTime and format it as "dd-MM-yyyy"
                 DateTime startDate;
                 if (
                     !DateTime.TryParseExact(
@@ -242,9 +261,18 @@ namespace VenueManagement
                     );
                     return;
                 }
-                cmdCheck.Parameters.AddWithValue("@start_date", startDate.ToString("dd-MM-yyyy"));
-                // Convert enddate to DateTime and format it as "dd-MM-yyyy"
+
+                // Convert enddate to DateTime
                 DateTime endDate = enddate.Value;
+
+                // Check if enddate is earlier than startingdate
+                if (endDate.Date < startDate.Date)
+                {
+                    MessageBox.Show("End date cannot be earlier than start date.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                cmdCheck.Parameters.AddWithValue("@start_date", startDate.ToString("dd-MM-yyyy"));
                 cmdCheck.Parameters.AddWithValue("@end_date", endDate.ToString("dd-MM-yyyy"));
 
                 cmdCheck.Parameters.AddWithValue("@start_time", startTime.ToString("h:mm:ss tt"));
@@ -356,32 +384,50 @@ namespace VenueManagement
         private void button3_Click(object sender, EventArgs e)
         {
             if (
-                txtid.Text != ""
-                && txtfname.Text != ""
-                && txtlname.Text != ""
-                && actevent.Text != ""
-                && purpose.Text != ""
-                && cmbvenue.Text != ""
-                && depcmb.Text != ""
-                && txtcontact.Text != ""
-                && startingdate.Text != ""
-                && enddate.Text != ""
-                && startingtime.Text != ""
-                && endtime.Text != ""
-            )
+    txtid.Text != ""
+    && txtfname.Text != ""
+    && txtlname.Text != ""
+    && actevent.Text != ""
+    && purpose.Text != ""
+    && cmbvenue.Text != ""
+    && depcmb.Text != ""
+    && txtcontact.Text != ""
+    && startingdate.Text != ""
+    && enddate.Text != ""
+    && startingtime.Text != ""
+    && endtime.Text != ""
+)
             {
-                cmd = new MySqlCommand("delete from venue_ms.re_venue where id = @id", con);
+                cmd = new MySqlCommand("DELETE FROM venue_ms.re_venue WHERE id = @id", con);
                 con.Open();
                 cmd.Parameters.AddWithValue("@id", txtid.Text);
 
-                cmd.ExecuteNonQuery();
+                int rowsAffected = cmd.ExecuteNonQuery();
                 con.Close();
-                MessageBox.Show(
-                    "Record Successfully Deleted",
-                    "DELETE",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
+
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show(
+                        "Record Successfully Deleted",
+                        "DELETE",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    // Toggle button visibility after successful delete
+                    button1.Visible = true; // Save button
+                    button2.Visible = false; // Update button
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "No record found with the specified ID.",
+                        "ERROR",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                }
+
                 DisplayData();
                 ClearData();
             }
@@ -394,6 +440,7 @@ namespace VenueManagement
                     MessageBoxIcon.Error
                 );
             }
+
         }
 
         private void startingdate_TextChanged_1(object sender, EventArgs e) { }
@@ -560,6 +607,19 @@ namespace VenueManagement
                 && endtime.Text != ""
             )
             {
+                // Add validation for Philippine phone number
+                Regex phoneNumpattern = new Regex(@"^09\d{9}$");
+                if (!phoneNumpattern.IsMatch(txtcontact.Text))
+                {
+                    MessageBox.Show(
+                        "Invalid phone number. Please enter a valid Philippine phone number starting with 09 and consisting of 11 numbers.",
+                        "ERROR",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                    return;
+                }
+
                 if (con.State != ConnectionState.Open)
                 {
                     con.Open();
@@ -657,6 +717,29 @@ namespace VenueManagement
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
+            }
+        }
+
+        private void enddate_ValueChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtcontact_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtcontact_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit (e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
             }
         }
     }

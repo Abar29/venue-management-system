@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -81,6 +82,50 @@ namespace VenueManagement
             // if i click this picturebox, it will back into the adminForm
             new adminForm().Show();
             this.Hide();
+        }
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nWidthEllipse,
+            int nHeigthEllipse,
+            int v
+        );
+
+        private void depForm_Load(object sender, EventArgs e)
+        {
+            panel1.Location = new Point(
+               this.ClientSize.Width / 2 - panel1.Size.Width / 2,
+               this.ClientSize.Height / 2 - panel1.Size.Height / 2
+           );
+            panel1.Anchor = AnchorStyles.None;
+
+            panel1.Region = Region.FromHrgn(
+                CreateRoundRectRgn(0, 0, panel1.Width, panel1.Height, 30, 30)
+            );
+
+        }
+
+        private void btndel_Click(object sender, EventArgs e)
+        {
+
+            if (txtid.Text != "" && txtdep.Text != "")
+            {
+                cmd = new MySqlCommand("delete from venue_ms.department where id = @id", con);
+                con.Open();
+                cmd.Parameters.AddWithValue("@id", txtid.Text);
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("Record Successfully Deleted", "DELETE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DisplayData();
+                ClearData();
+            }
+            else
+            {
+                MessageBox.Show("Select the record you want to Delete", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

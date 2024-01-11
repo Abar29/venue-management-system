@@ -23,6 +23,23 @@ namespace VenueManagement
         public UserControlDays()
         {
             InitializeComponent();
+
+            // Add event handlers for MouseEnter and MouseLeave events
+            this.MouseEnter += new EventHandler(UserControlDays_MouseEnter);
+            this.MouseLeave += new EventHandler(UserControlDays_MouseLeave);
+        }
+
+        private void UserControlDays_MouseEnter(object sender, EventArgs e)
+        {
+            // Change the background color to light gray when the mouse enters the control
+            this.BackColor = Color.LightGray;
+        }
+
+        // Event handler for MouseLeave event
+        private void UserControlDays_MouseLeave(object sender, EventArgs e)
+        {
+            // Change the background color back to white when the mouse leaves the control
+            this.BackColor = Color.White;
         }
 
         private void UserControlDays_Load(object sender, EventArgs e) { }

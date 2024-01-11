@@ -38,6 +38,7 @@ C:\Users\admin\Desktop\venue-management-system\bin\Debug\VenueManagement.pdb
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.csproj.AssemblyReference.cache
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.addvenuecs.resources
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.adminForm.resources
+C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.depForm.resources
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.fillForms.resources
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.LoginForm.resources
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.Properties.Resources.resources
@@ -49,4 +50,3 @@ C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.csproj.
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.csproj.CopyComplete
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.exe
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.pdb
-C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.depForm.resources

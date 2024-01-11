@@ -180,5 +180,50 @@
   <ItemGroup>
     <None Include="Resources\back.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-calendar-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\360_F_475022683_BDaip34cZdg65c2rmt31wknpEhIy2dI2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mall1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mall2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\it-department.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ezt7LO3XIAAvF6c.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undraw_settings_tab_mgiw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undraw_schedule_meeting_52nu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reservation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\client.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\location.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\schedule.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

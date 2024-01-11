@@ -73,5 +73,10 @@ namespace VenueManagement
         {
 
         }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
