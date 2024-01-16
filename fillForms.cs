@@ -78,7 +78,7 @@ namespace VenueManagement
 
             // Set the Text property of the TextBox
             startingdate.Text = dateString;
-            
+
         }
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -234,6 +234,23 @@ namespace VenueManagement
                     return;
                 }
 
+                // Add validation for time range
+                TimeSpan start = new TimeSpan(8, 0, 0); // 8 AM
+                TimeSpan end = new TimeSpan(20, 0, 0); // 8 PM
+                TimeSpan currentTimeStart = startTime.TimeOfDay;
+                TimeSpan currentTimeEnd = endTime.TimeOfDay;
+
+                if (currentTimeStart < start || currentTimeEnd > end)
+                {
+                    MessageBox.Show(
+                        "Invalid time. Please enter a time between 8:00 AM and 8:00 PM.",
+                        "ERROR",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                    return;
+                }
+
                 // Create a new MySqlCommand to check if a reservation already exists with the same venue, date, and time
                 MySqlCommand cmdCheck = new MySqlCommand(
                     "SELECT * FROM venue_ms.re_venue WHERE venue = @venue AND ((start_date <= @start_date AND end_date >= @start_date) OR (start_date <= @end_date AND end_date >= @end_date) OR (start_date >= @start_date AND end_date <= @end_date)) AND ((TIME(start_time) <= TIME(@start_time) AND TIME(end_time) > TIME(@start_time)) OR (TIME(start_time) < TIME(@end_time) AND TIME(end_time) >= @end_time) OR (TIME(start_time) >= TIME(@start_time) AND TIME(end_time) <= @end_time))",
@@ -299,6 +316,48 @@ namespace VenueManagement
                     }
                 }
                 drCheck.Close();
+
+                // Create a new MySqlCommand to count the number of reservations for the selected venue on the selected date
+                MySqlCommand cmdCount = new MySqlCommand(
+                    "SELECT COUNT(*) FROM venue_ms.re_venue WHERE venue = @venue AND start_date = @start_date",
+                    con
+                );
+                cmdCount.Parameters.AddWithValue("@venue", cmbvenue.Text);
+                cmdCount.Parameters.AddWithValue("@start_date", startDate.ToString("yyyy-MM-dd"));
+
+                int reservationCount;
+                using (var drCount = cmdCount.ExecuteReader())
+                {
+                    if (drCount.Read())
+                    {
+                        reservationCount = drCount.GetInt32(0);
+                    }
+                    else
+                    {
+                        // Handle the case where the query did not return a result
+                        MessageBox.Show(
+                            "An error occurred while checking the number of reservations.",
+                            "ERROR",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
+                        return;
+                    }
+                }
+
+                if (reservationCount >= 2)
+                {
+                    // If the venue has already been reserved twice on the selected date, show an error message and return
+                    MessageBox.Show(
+                        "This venue has already been reserved twice on the selected date. Please select a different venue or date.",
+                        "ERROR",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                    return;
+                }
+
+                // If the venue has been reserved less than twice on the selected date, proceed with inserting the new reservation
 
                 // If no reservation exists, insert the new record
                 cmd = new MySqlCommand(
@@ -384,19 +443,19 @@ namespace VenueManagement
         private void button3_Click(object sender, EventArgs e)
         {
             if (
-    txtid.Text != ""
-    && txtfname.Text != ""
-    && txtlname.Text != ""
-    && actevent.Text != ""
-    && purpose.Text != ""
-    && cmbvenue.Text != ""
-    && depcmb.Text != ""
-    && txtcontact.Text != ""
-    && startingdate.Text != ""
-    && enddate.Text != ""
-    && startingtime.Text != ""
-    && endtime.Text != ""
-)
+                txtid.Text != ""
+                && txtfname.Text != ""
+                && txtlname.Text != ""
+                && actevent.Text != ""
+                && purpose.Text != ""
+                && cmbvenue.Text != ""
+                && depcmb.Text != ""
+                && txtcontact.Text != ""
+                && startingdate.Text != ""
+                && enddate.Text != ""
+                && startingtime.Text != ""
+                && endtime.Text != ""
+            )
             {
                 cmd = new MySqlCommand("DELETE FROM venue_ms.re_venue WHERE id = @id", con);
                 con.Open();
@@ -620,6 +679,52 @@ namespace VenueManagement
                     return;
                 }
 
+                // Convert start_time and end_time to 24-hour format
+                DateTime startTime, endTime;
+                if (
+                    !DateTime.TryParseExact(
+                        startingtime.Text,
+                        "h:mm:ss tt",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out startTime
+                    )
+                    || !DateTime.TryParseExact(
+                        endtime.Text,
+                        "h:mm:ss tt",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out endTime
+                    )
+                )
+                {
+                    // Handle the case where startingtime.Text or endtime.Text is not in the "h:mm:ss tt" format
+                    MessageBox.Show(
+                        "Starting time or end time is not in the correct format. Please enter the time in the format 'h:mm:ss AM/PM'.",
+                        "ERROR",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                    return;
+                }
+
+                // Add validation for time range
+                TimeSpan start = new TimeSpan(8, 0, 0); // 8 AM
+                TimeSpan end = new TimeSpan(20, 0, 0); // 8 PM
+                TimeSpan currentTimeStart = startTime.TimeOfDay;
+                TimeSpan currentTimeEnd = endTime.TimeOfDay;
+
+                if (currentTimeStart < start || currentTimeEnd > end)
+                {
+                    MessageBox.Show(
+                        "Invalid time. Please enter a time between 8:00 AM and 8:00 PM.",
+                        "ERROR",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                    return;
+                }
+
                 if (con.State != ConnectionState.Open)
                 {
                     con.Open();
@@ -737,7 +842,7 @@ namespace VenueManagement
 
         private void txtcontact_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit (e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
             }

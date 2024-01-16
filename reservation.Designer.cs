@@ -49,18 +49,20 @@ namespace VenueManagement
             // daycontainer
             // 
             this.daycontainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
-            this.daycontainer.Location = new System.Drawing.Point(184, 125);
+            this.daycontainer.Location = new System.Drawing.Point(138, 102);
+            this.daycontainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.daycontainer.Name = "daycontainer";
-            this.daycontainer.Size = new System.Drawing.Size(839, 669);
+            this.daycontainer.Size = new System.Drawing.Size(629, 544);
             this.daycontainer.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(209, 87);
+            this.label1.Location = new System.Drawing.Point(157, 71);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 20);
+            this.label1.Size = new System.Drawing.Size(55, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Sunday";
             // 
@@ -68,9 +70,10 @@ namespace VenueManagement
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(325, 87);
+            this.label2.Location = new System.Drawing.Point(244, 71);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 20);
+            this.label2.Size = new System.Drawing.Size(55, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "Monday";
             // 
@@ -78,9 +81,10 @@ namespace VenueManagement
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(439, 87);
+            this.label3.Location = new System.Drawing.Point(329, 71);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 20);
+            this.label3.Size = new System.Drawing.Size(63, 16);
             this.label3.TabIndex = 3;
             this.label3.Text = "Tuesday";
             // 
@@ -88,9 +92,10 @@ namespace VenueManagement
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(549, 87);
+            this.label4.Location = new System.Drawing.Point(412, 71);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(99, 20);
+            this.label4.Size = new System.Drawing.Size(79, 16);
             this.label4.TabIndex = 4;
             this.label4.Text = "Wednesday";
             // 
@@ -98,9 +103,10 @@ namespace VenueManagement
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(686, 87);
+            this.label5.Location = new System.Drawing.Point(514, 71);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 20);
+            this.label5.Size = new System.Drawing.Size(71, 16);
             this.label5.TabIndex = 5;
             this.label5.Text = "Thursday";
             // 
@@ -108,9 +114,10 @@ namespace VenueManagement
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(811, 87);
+            this.label6.Location = new System.Drawing.Point(608, 71);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 20);
+            this.label6.Size = new System.Drawing.Size(55, 16);
             this.label6.TabIndex = 6;
             this.label6.Text = "Friday";
             // 
@@ -118,27 +125,30 @@ namespace VenueManagement
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(917, 87);
+            this.label7.Location = new System.Drawing.Point(688, 71);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 20);
+            this.label7.Size = new System.Drawing.Size(71, 16);
             this.label7.TabIndex = 7;
             this.label7.Text = "Saturday";
             // 
             // btnprevios
             // 
-            this.btnprevios.Location = new System.Drawing.Point(850, 824);
+            this.btnprevios.Location = new System.Drawing.Point(638, 670);
+            this.btnprevios.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnprevios.Name = "btnprevios";
-            this.btnprevios.Size = new System.Drawing.Size(75, 23);
+            this.btnprevios.Size = new System.Drawing.Size(56, 19);
             this.btnprevios.TabIndex = 8;
-            this.btnprevios.Text = "Previos";
+            this.btnprevios.Text = "Previous";
             this.btnprevios.UseVisualStyleBackColor = true;
             this.btnprevios.Click += new System.EventHandler(this.btnprevios_Click);
             // 
             // btnnext
             // 
-            this.btnnext.Location = new System.Drawing.Point(948, 824);
+            this.btnnext.Location = new System.Drawing.Point(711, 670);
+            this.btnnext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnnext.Name = "btnnext";
-            this.btnnext.Size = new System.Drawing.Size(75, 23);
+            this.btnnext.Size = new System.Drawing.Size(56, 19);
             this.btnnext.TabIndex = 9;
             this.btnnext.Text = "Next";
             this.btnnext.UseVisualStyleBackColor = true;
@@ -147,9 +157,10 @@ namespace VenueManagement
             // lbdate
             // 
             this.lbdate.Font = new System.Drawing.Font("Courier New", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbdate.Location = new System.Drawing.Point(479, 26);
+            this.lbdate.Location = new System.Drawing.Point(359, 21);
+            this.lbdate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbdate.Name = "lbdate";
-            this.lbdate.Size = new System.Drawing.Size(269, 28);
+            this.lbdate.Size = new System.Drawing.Size(202, 23);
             this.lbdate.TabIndex = 10;
             this.lbdate.Text = "MONTH YEAR";
             this.lbdate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -158,9 +169,10 @@ namespace VenueManagement
             // 
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox4.Image = global::VenueManagement.Properties.Resources.icons8_x_50;
-            this.pictureBox4.Location = new System.Drawing.Point(1157, -5);
+            this.pictureBox4.Location = new System.Drawing.Point(868, -4);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(46, 37);
+            this.pictureBox4.Size = new System.Drawing.Size(34, 30);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 11;
             this.pictureBox4.TabStop = false;
@@ -170,9 +182,10 @@ namespace VenueManagement
             // 
             this.picback.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picback.Image = global::VenueManagement.Properties.Resources.back;
-            this.picback.Location = new System.Drawing.Point(1157, -5);
+            this.picback.Location = new System.Drawing.Point(868, -4);
+            this.picback.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.picback.Name = "picback";
-            this.picback.Size = new System.Drawing.Size(46, 37);
+            this.picback.Size = new System.Drawing.Size(34, 30);
             this.picback.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picback.TabIndex = 12;
             this.picback.TabStop = false;
@@ -180,10 +193,10 @@ namespace VenueManagement
             // 
             // reservation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.ClientSize = new System.Drawing.Size(1202, 855);
+            this.ClientSize = new System.Drawing.Size(902, 695);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.lbdate);
             this.Controls.Add(this.btnnext);
@@ -198,6 +211,7 @@ namespace VenueManagement
             this.Controls.Add(this.daycontainer);
             this.Controls.Add(this.picback);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "reservation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "reservation";

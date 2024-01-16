@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace VenueManagement
 {
-    
+
     public partial class reservation : Form
     {
         public PictureBox PictureBox4 { get { return pictureBox4; } }
@@ -23,61 +23,27 @@ namespace VenueManagement
         public reservation()
         {
             InitializeComponent();
-            
+
         }
 
         private void reservation_Load(object sender, EventArgs e)
         {
-            displaDays();
+            displaDays(DateTime.Now.Year, DateTime.Now.Month);
 
         }
 
-        
 
-        private void displaDays()
+
+        private void displaDays(int selectedYear, int selectedMonth)
         {
             DateTime now = DateTime.Now;
-            month = now.Month;
-            year = now.Year;
+            month = selectedMonth;
+            year = selectedYear;
 
             string monthname = DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
             lbdate.Text = monthname + " " + year;
             static_month = month;
             static_year = year;
-
-            //lets get the first day of the month
-            DateTime startofthemonth = new DateTime(year,month,1);
-            // get the count of the days of the month
-            int days = DateTime.DaysInMonth(year, month);
-            //convert the start of the month to integer
-            int dayoftheweek = Convert.ToInt32(startofthemonth.DayOfWeek.ToString("d")) + 1;
-            // lets create blank userControl
-            for (int i = 1; i < dayoftheweek; i++)
-            {
-                UserControlBlank ucblank = new UserControlBlank();
-                daycontainer.Controls.Add(ucblank);
-            }
-            //lets create user control for days
-            for(int i  = 1; i <= days; i++)
-            {
-                UserControlDays ucdays = new UserControlDays();
-                ucdays.days(i);
-                daycontainer.Controls.Add(ucdays);
-
-            }
-
-        }
-
-        private void btnprevios_Click(object sender, EventArgs e)
-        {
-            daycontainer.Controls.Clear();
-            month--;
-            static_month = month;
-            static_year = year;
-
-
-            string monthname = DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
-            lbdate.Text = monthname + " " + year;
 
             //lets get the first day of the month
             DateTime startofthemonth = new DateTime(year, month, 1);
@@ -94,14 +60,30 @@ namespace VenueManagement
             //lets create user control for days
             for (int i = 1; i <= days; i++)
             {
-                UserControlDays ucdays = new UserControlDays();
+                UserControlDays ucdays = new UserControlDays(year, month);
                 ucdays.days(i);
                 daycontainer.Controls.Add(ucdays);
-
             }
+
         }
 
-       
+        private void btnprevios_Click(object sender, EventArgs e)
+        {
+            daycontainer.Controls.Clear();
+            month--;
+            if (month < 1)
+            {
+                month = 12;
+                year--;
+            }
+            static_month = month;
+            static_year = year;
+
+            displaDays(year, month);
+
+        }
+
+
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
@@ -122,36 +104,18 @@ namespace VenueManagement
         {
             daycontainer.Controls.Clear();
             month++;
+            if (month > 12)
+            {
+                month = 1;
+                year++;
+            }
             static_month = month;
             static_year = year;
 
-            string monthname = DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
-            lbdate.Text = monthname + " " + year;
-
-            //lets get the first day of the month
-            DateTime startofthemonth = new DateTime(year, month, 1);
-            // get the count of the days of the month
-            int days = DateTime.DaysInMonth(year, month);
-            //convert the start of the month to integer
-            int dayoftheweek = Convert.ToInt32(startofthemonth.DayOfWeek.ToString("d")) + 1;
-            // lets create blank userControl
-            for (int i = 1; i < dayoftheweek; i++)
-            {
-                UserControlBlank ucblank = new UserControlBlank();
-                daycontainer.Controls.Add(ucblank);
-            }
-            //lets create user control for days
-            for (int i = 1; i <= days; i++)
-            {
-                UserControlDays ucdays = new UserControlDays();
-                ucdays.days(i);
-                daycontainer.Controls.Add(ucdays);
-
-            }
-        }
+            displaDays(year, month);
 
         
-
+        }
 
     }
 }
