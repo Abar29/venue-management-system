@@ -50,3 +50,6 @@ C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.csproj.
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.csproj.CopyComplete
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.exe
 C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.pdb
+C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.reports_table.resources
+C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.reports.resources
+C:\Users\admin\Desktop\venue-management-system\obj\Debug\VenueManagement.aboutus.resources

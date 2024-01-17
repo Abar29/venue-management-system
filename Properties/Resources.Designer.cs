@@ -73,6 +73,16 @@ namespace VenueManagement.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap about {
+            get {
+                object obj = ResourceManager.GetObject("about", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap back {
             get {
                 object obj = ResourceManager.GetObject("back", resourceCulture);
@@ -306,6 +316,16 @@ namespace VenueManagement.Properties {
         internal static System.Drawing.Bitmap undraw_settings_tab_mgiw {
             get {
                 object obj = ResourceManager.GetObject("undraw_settings_tab_mgiw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VEnue_management {
+            get {
+                object obj = ResourceManager.GetObject("VEnue management", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

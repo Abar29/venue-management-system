@@ -104,5 +104,22 @@ namespace VenueManagement
             depForm.Show();
             this.Close();
         }
+
+        private void txtrep_Click(object sender, EventArgs e)
+        {
+            if (txtrep.Text == txtrep.Text)
+            {
+
+                new reports_table().Show();
+
+                this.Hide();
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            new aboutus().Show();
+            this.Hide();
+        }
     }
 }

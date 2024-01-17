@@ -45,18 +45,20 @@ namespace VenueManagement
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtrep = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btn3 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.addvenue = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.searchpic = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchpic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
@@ -64,7 +66,6 @@ namespace VenueManagement
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.searchpic);
             this.panel1.Controls.Add(this.txtsearch);
@@ -72,7 +73,7 @@ namespace VenueManagement
             this.panel1.Controls.Add(this.pictureBox4);
             this.panel1.Location = new System.Drawing.Point(49, 53);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1403, 563);
+            this.panel1.Size = new System.Drawing.Size(1403, 639);
             this.panel1.TabIndex = 3;
             // 
             // dataGridView1
@@ -93,12 +94,12 @@ namespace VenueManagement
             this.Column10,
             this.Column11,
             this.Column12});
-            this.dataGridView1.Location = new System.Drawing.Point(364, 179);
+            this.dataGridView1.Location = new System.Drawing.Point(364, 261);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1027, 372);
+            this.dataGridView1.Size = new System.Drawing.Size(1027, 375);
             this.dataGridView1.TabIndex = 12;
             // 
             // Column1
@@ -213,7 +214,7 @@ namespace VenueManagement
             // txtsearch
             // 
             this.txtsearch.Font = new System.Drawing.Font("Courier New", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtsearch.Location = new System.Drawing.Point(530, 132);
+            this.txtsearch.Location = new System.Drawing.Point(530, 213);
             this.txtsearch.Multiline = true;
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(861, 42);
@@ -223,6 +224,8 @@ namespace VenueManagement
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Controls.Add(this.txtrep);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.btn3);
             this.panel2.Controls.Add(this.pictureBox1);
@@ -232,15 +235,28 @@ namespace VenueManagement
             this.panel2.ForeColor = System.Drawing.Color.Black;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(358, 563);
+            this.panel2.Size = new System.Drawing.Size(358, 639);
             this.panel2.TabIndex = 7;
+            // 
+            // txtrep
+            // 
+            this.txtrep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
+            this.txtrep.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.txtrep.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtrep.Location = new System.Drawing.Point(87, 571);
+            this.txtrep.Name = "txtrep";
+            this.txtrep.Size = new System.Drawing.Size(208, 42);
+            this.txtrep.TabIndex = 17;
+            this.txtrep.Text = "Reports";
+            this.txtrep.UseVisualStyleBackColor = false;
+            this.txtrep.Click += new System.EventHandler(this.txtrep_Click);
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(87, 303);
+            this.button1.Location = new System.Drawing.Point(87, 390);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(208, 42);
             this.button1.TabIndex = 16;
@@ -253,7 +269,7 @@ namespace VenueManagement
             this.btn3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
             this.btn3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn3.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn3.Location = new System.Drawing.Point(87, 454);
+            this.btn3.Location = new System.Drawing.Point(87, 513);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(208, 42);
             this.btn3.TabIndex = 15;
@@ -266,7 +282,7 @@ namespace VenueManagement
             this.btn2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
             this.btn2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn2.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn2.Location = new System.Drawing.Point(87, 377);
+            this.btn2.Location = new System.Drawing.Point(87, 452);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(208, 42);
             this.btn2.TabIndex = 13;
@@ -279,7 +295,7 @@ namespace VenueManagement
             this.addvenue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
             this.addvenue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addvenue.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addvenue.Location = new System.Drawing.Point(87, 230);
+            this.addvenue.Location = new System.Drawing.Point(87, 330);
             this.addvenue.Name = "addvenue";
             this.addvenue.Size = new System.Drawing.Size(208, 42);
             this.addvenue.TabIndex = 14;
@@ -287,27 +303,28 @@ namespace VenueManagement
             this.addvenue.UseVisualStyleBackColor = false;
             this.addvenue.Click += new System.EventHandler(this.addevent_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Swis721 BlkEx BT", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(656, 64);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(358, 34);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "WELCOME ADMIN";
-            // 
             // searchpic
             // 
             this.searchpic.Image = global::VenueManagement.Properties.Resources.icons8_reserch_64;
-            this.searchpic.Location = new System.Drawing.Point(1345, 138);
+            this.searchpic.Location = new System.Drawing.Point(1345, 213);
             this.searchpic.Name = "searchpic";
             this.searchpic.Size = new System.Drawing.Size(46, 33);
             this.searchpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.searchpic.TabIndex = 11;
             this.searchpic.TabStop = false;
             this.searchpic.Click += new System.EventHandler(this.searchpic_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Image = global::VenueManagement.Properties.Resources.about;
+            this.pictureBox2.Location = new System.Drawing.Point(141, 252);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 72);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 18;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox1
             // 
@@ -337,7 +354,7 @@ namespace VenueManagement
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(167)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(1494, 628);
+            this.ClientSize = new System.Drawing.Size(1494, 718);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -351,6 +368,7 @@ namespace VenueManagement
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchpic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
@@ -382,7 +400,8 @@ namespace VenueManagement
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button txtrep;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
