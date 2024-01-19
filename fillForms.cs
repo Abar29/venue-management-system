@@ -236,14 +236,14 @@ namespace VenueManagement
 
                 // Add validation for time range
                 TimeSpan start = new TimeSpan(8, 0, 0); // 8 AM
-                TimeSpan end = new TimeSpan(20, 0, 0); // 8 PM
+                TimeSpan end = new TimeSpan(17, 0, 0); // 5 PM
                 TimeSpan currentTimeStart = startTime.TimeOfDay;
                 TimeSpan currentTimeEnd = endTime.TimeOfDay;
 
                 if (currentTimeStart < start || currentTimeEnd > end)
                 {
                     MessageBox.Show(
-                        "Invalid time. Please enter a time between 8:00 AM and 8:00 PM.",
+                        "Invalid time. Please enter a time between 8:00 AM and 5:00 PM.",
                         "ERROR",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error
