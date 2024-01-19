@@ -16,7 +16,7 @@ namespace VenueManagement
         private static fillForms instance = null;
 
         MySqlConnection con = new MySqlConnection(
-            "datasource=localhost;port=3306;username=root;password=;"
+            "datasource=localhost;port=3306;username=root;password=;database=venue_ms"
         );
         MySqlCommand cmd;
         MySqlDataAdapter adapt;
@@ -35,6 +35,8 @@ namespace VenueManagement
         private string startingTimeValue;
         private string endTimeValue;
 
+        private DateTime? lastSetDate = null;
+
         public TextBox StartingDateTextBox
         {
             get { return startingdate; } // 'startingdate' should be the name of your TextBox
@@ -45,7 +47,7 @@ namespace VenueManagement
         {
             InitializeComponent();
             DisplayData();
-            BindData();
+
             Binddep();
 
             button2.Visible = false;
@@ -71,14 +73,38 @@ namespace VenueManagement
             }
         }
 
-        public void SetDate(DateTime selectedDate)
+        public void SetDate(DateTime? selectedDate)
         {
+            // Check if selectedDate is null
+            if (!selectedDate.HasValue)
+            {
+                Console.WriteLine("SetDate called with null date.");
+                return;
+            }
+
+            // Check if SetDate has already been called with the same date
+            if (lastSetDate.HasValue && lastSetDate.Value.Date == selectedDate.Value.Date)
+            {
+                return;
+            }
+
+            Console.WriteLine($"SetDate called with: {selectedDate.Value}");
+
             // Convert the date to a string in the format you want
-            string dateString = selectedDate.ToString("dd-MM-yyyy");
+            string dateString = selectedDate.Value.ToString("dd-MM-yyyy");
+
+            Console.WriteLine($"SetDate executed with: {startingdate.Text}");
 
             // Set the Text property of the TextBox
             startingdate.Text = dateString;
 
+            Console.WriteLine($"startingdate.Text after setting: {startingdate.Text}");
+
+            // Call BindData
+            BindData();
+
+            // Update the lastSetDate
+            lastSetDate = selectedDate;
         }
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -124,7 +150,10 @@ namespace VenueManagement
             }
         }
 
-        private void startingdate_TextChanged(object sender, EventArgs e) { }
+        private void startingdate_TextChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine($"startingdate_TextChanged called with: {startingdate.Text}");
+        }
 
         private void enddate_ValueChanged(object sender, EventArgs e)
         {
@@ -428,16 +457,81 @@ namespace VenueManagement
 
         private void BindData()
         {
-            con.Open();
+            Console.WriteLine($"BindData called with: {startingdate.Text}");
 
-            MySqlCommand cmd = new MySqlCommand("select * from venue_ms.venue_table ", con);
-            dr = cmd.ExecuteReader();
-            while (dr.Read())
+            if (string.IsNullOrEmpty(startingdate.Text))
             {
-                cmbvenue.Items.Add(dr[1].ToString());
+                MessageBox.Show("Please enter a date.", "No Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            dr.Close();
-            con.Close();
+
+            // Check if the connection is not already open
+            if (con.State != ConnectionState.Open)
+            {
+                con.Open();
+            }
+
+            // Try to convert the date to the correct format
+            DateTime date;
+            bool isDateParsed = DateTime.TryParseExact(startingdate.Text, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+
+            Console.WriteLine($"Date parsing successful: {isDateParsed}");
+
+            if (!isDateParsed)
+            {
+                MessageBox.Show("Please enter a valid date.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string formattedDate = date.ToString("dd-MM-yyyy");
+
+            string query = @"
+                SELECT venue 
+                FROM venue_table 
+                WHERE venue NOT IN (
+                    SELECT venue 
+                    FROM re_venue 
+                    WHERE start_date = @date
+                    GROUP BY venue
+                    HAVING COUNT(*) >= 2
+                )
+            ";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@date", formattedDate);
+
+            Console.WriteLine($"Executing query: {query} with date: {formattedDate}");
+
+            try
+            {
+                dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    Console.WriteLine("Query executed successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("No venues available for this date.");
+                }
+
+                cmbvenue.Items.Clear();
+                while (dr.Read())
+                {
+                    cmbvenue.Items.Add(dr[0].ToString());
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception caught: {ex.Message}");
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -502,7 +596,10 @@ namespace VenueManagement
 
         }
 
-        private void startingdate_TextChanged_1(object sender, EventArgs e) { }
+        private void startingdate_TextChanged_1(object sender, EventArgs e)
+        {
+            Console.WriteLine($"startingdate_TextChanged_1 called with: {startingdate.Text}");
+        }
 
         private void startingdate_MouseClick(object sender, MouseEventArgs e)
         {
@@ -640,7 +737,11 @@ namespace VenueManagement
 
         private void Binddep()
         {
-            con.Open();
+            // Check if the connection is not already open
+            if (con.State != ConnectionState.Open)
+            {
+                con.Open();
+            }
 
             MySqlCommand cmd = new MySqlCommand("select * from venue_ms.department ", con);
             dr = cmd.ExecuteReader();
