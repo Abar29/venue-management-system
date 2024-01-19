@@ -269,7 +269,7 @@ namespace VenueManagement
                 TimeSpan currentTimeStart = startTime.TimeOfDay;
                 TimeSpan currentTimeEnd = endTime.TimeOfDay;
 
-                if (currentTimeStart < start || currentTimeEnd > end)
+                if (currentTimeStart < start || currentTimeEnd > end || currentTimeEnd < currentTimeStart)
                 {
                     MessageBox.Show(
                         "Invalid time. Please enter a time between 8:00 AM and 5:00 PM.",
@@ -389,23 +389,26 @@ namespace VenueManagement
                 // If the venue has been reserved less than twice on the selected date, proceed with inserting the new reservation
 
                 // If no reservation exists, insert the new record
-                cmd = new MySqlCommand(
-                    "insert into venue_ms.re_venue (id,lname,fname,act_event,nature_event,venue,department,contact,start_date,end_date,start_time,end_time) values (@id,@lname,@fname,@act_event,@nature_event,@venue,@department,@contact,@start_date,@end_date,@start_time,@end_time)",
-                    con
-                );
-                cmd.Parameters.AddWithValue("@id", txtid.Text);
-                cmd.Parameters.AddWithValue("@lname", txtlname.Text);
-                cmd.Parameters.AddWithValue("@fname", txtfname.Text);
-                cmd.Parameters.AddWithValue("@act_event", actevent.Text);
-                cmd.Parameters.AddWithValue("@nature_event", purpose.Text);
-                cmd.Parameters.AddWithValue("@venue", cmbvenue.Text);
-                cmd.Parameters.AddWithValue("@department", depcmb.Text);
-                cmd.Parameters.AddWithValue("@contact", txtcontact.Text);
-                cmd.Parameters.AddWithValue("@start_date", startDate.ToString("dd-MM-yyyy"));
-                cmd.Parameters.AddWithValue("@end_date", endDate.ToString("dd-MM-yyyy"));
-                cmd.Parameters.AddWithValue("@start_time", startTime.ToString("h:mm:ss tt"));
-                cmd.Parameters.AddWithValue("@end_time", endTime.ToString("h:mm:ss tt"));
-                cmd.ExecuteNonQuery();
+                for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                {
+                    cmd = new MySqlCommand(
+                        "insert into venue_ms.re_venue (id,lname,fname,act_event,nature_event,venue,department,contact,start_date,end_date,start_time,end_time) values (@id,@lname,@fname,@act_event,@nature_event,@venue,@department,@contact,@start_date,@end_date,@start_time,@end_time)",
+                        con
+                    );
+                    cmd.Parameters.AddWithValue("@id", txtid.Text);
+                    cmd.Parameters.AddWithValue("@lname", txtlname.Text);
+                    cmd.Parameters.AddWithValue("@fname", txtfname.Text);
+                    cmd.Parameters.AddWithValue("@act_event", actevent.Text);
+                    cmd.Parameters.AddWithValue("@nature_event", purpose.Text);
+                    cmd.Parameters.AddWithValue("@venue", cmbvenue.Text);
+                    cmd.Parameters.AddWithValue("@department", depcmb.Text);
+                    cmd.Parameters.AddWithValue("@contact", txtcontact.Text);
+                    cmd.Parameters.AddWithValue("@start_date", date.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("@end_date", date.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("@start_time", startTime.ToString("h:mm:ss tt"));
+                    cmd.Parameters.AddWithValue("@end_time", endTime.ToString("h:mm:ss tt"));
+                    cmd.ExecuteNonQuery();
+                }
                 con.Close();
                 MessageBox.Show(
                     "Event Successfully Added",
@@ -449,7 +452,7 @@ namespace VenueManagement
             cmbvenue.Text = "";
             depcmb.Text = "";
             txtcontact.Text = "";
-            startingdate.Text = "";
+            // startingdate.Text = "";
             enddate.Text = "";
             startingtime.Text = "";
             endtime.Text = "";
@@ -815,7 +818,7 @@ namespace VenueManagement
                 TimeSpan currentTimeStart = startTime.TimeOfDay;
                 TimeSpan currentTimeEnd = endTime.TimeOfDay;
 
-                if (currentTimeStart < start || currentTimeEnd > end)
+                if (currentTimeStart < start || currentTimeEnd > end || currentTimeEnd < currentTimeStart)
                 {
                     MessageBox.Show(
                         "Invalid time. Please enter a time between 8:00 AM and 5:00 PM.",
