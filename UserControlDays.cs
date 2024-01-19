@@ -186,6 +186,8 @@ namespace VenueManagement
             // Construct a DateTime object from the year, month, and day
             DateTime selectedDateTime = new DateTime(year, month, day);
 
+            Console.WriteLine($"UserControlDays_Click called with: {selectedDateTime}");
+
             // Set UserControlDays.static_day, reservation.static_month, and reservation.static_year
             reservation.static_month = month;
             reservation.static_year = year;
@@ -206,6 +208,7 @@ namespace VenueManagement
             static_day = selectedDateTime.ToString("dd/MM/yyyy");
             fillForms fillFormsInstance = fillForms.Instance;
             fillFormsInstance.SetDate(selectedDateTime);
+            Console.WriteLine($"SetDate called with: {selectedDateTime}");
             fillFormsInstance.Show();
 
             // Close the reservation form
