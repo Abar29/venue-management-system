@@ -95,12 +95,18 @@ namespace VenueManagement
             // Check the number of reservations for the day
             int numReservations = GetNumReservations(selectedDateTime.ToString("dd-MM-yyyy"));
 
+            // Get the total number of venues
+            int totalVenues = GetTotalVenues();
+
+            // Each venue can have two reservations per day
+            int maxReservations = totalVenues * 2;
+
             if (numReservations == 0)
             {
                 // Light Green - that day is available for reservation
                 this.BackColor = Color.FromArgb(144, 238, 144); // LightGreen
             }
-            else if (numReservations <= 2)
+            else if (numReservations < maxReservations)
             {
                 // Light Yellow - that day is available but only limited to the other venues
                 this.BackColor = Color.FromArgb(255, 255, 174); // LightYellow
@@ -124,38 +130,61 @@ namespace VenueManagement
 
                 // Use parameterized query to avoid SQL injection
                 MySqlCommand cmd1 = new MySqlCommand(
-                    "SELECT COUNT(*) FROM venue_ms.re_venue WHERE start_date = @start_date",
+                    "SELECT COUNT(*) as count FROM venue_ms.re_venue WHERE start_date = @start_date",
                     con
                 );
                 cmd1.Parameters.AddWithValue("@start_date", DateTime.ParseExact(selectedDate, "dd-MM-yyyy", CultureInfo.InvariantCulture).ToString("dd-MM-yyyy"));
 
-                // Print the SQL query with actual parameter values
-                string queryWithParameters = cmd1.CommandText;
-                foreach (MySqlParameter param in cmd1.Parameters)
-                {
-                    queryWithParameters = queryWithParameters.Replace(param.ParameterName, param.Value.ToString());
-                }
-                Console.WriteLine($"SQL query: {queryWithParameters}");
-
+                int totalReservations = 0;
                 using (var dr1 = cmd1.ExecuteReader())
                 {
                     if (dr1.Read())
                     {
-                        int numReservations = dr1.GetInt32(0);
-                        Console.WriteLine($"Number of reservations for {selectedDate}: {numReservations}");
-                        return numReservations;
+                        totalReservations = dr1.GetInt32("count");
+                    }
+                }
+
+                return totalReservations;
+            }
+            catch (Exception ex)
+            {
+                // Log any exceptions that occur
+                Console.WriteLine($"Error getting number of reservations for {selectedDate}: {ex.Message}");
+                return 0;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        private int GetTotalVenues()
+        {
+            try
+            {
+                con.Open();
+
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT COUNT(*) FROM venue_ms.venue_table",
+                    con
+                );
+
+                using (var dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        return dr.GetInt32(0);
                     }
                     else
                     {
-                        Console.WriteLine($"No reservations found for {selectedDate}");
+                        Console.WriteLine("No venues found");
                         return 0;
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Log any exceptions that occur
-                Console.WriteLine($"Error getting number of reservations for {selectedDate}: {ex.Message}");
+                Console.WriteLine($"Error getting total number of venues: {ex.Message}");
                 return 0;
             }
             finally
@@ -197,6 +226,26 @@ namespace VenueManagement
             {
                 MessageBox.Show(
                     "Past dates cannot be selected!",
+                    "ERROR",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+
+            // Check the number of reservations for the day
+            int numReservations = GetNumReservations(selectedDateTime.ToString("dd-MM-yyyy"));
+
+            // Get the total number of venues
+            int totalVenues = GetTotalVenues();
+
+            // Each venue can have two reservations per day
+            int maxReservations = totalVenues * 2;
+
+            if (numReservations >= maxReservations)
+            {
+                MessageBox.Show(
+                    "No venue available on this day!",
                     "ERROR",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
