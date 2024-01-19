@@ -282,7 +282,7 @@ namespace VenueManagement
 
                 // Create a new MySqlCommand to check if a reservation already exists with the same venue, date, and time
                 MySqlCommand cmdCheck = new MySqlCommand(
-                    "SELECT * FROM venue_ms.re_venue WHERE venue = @venue AND ((start_date <= @start_date AND end_date >= @start_date) OR (start_date <= @end_date AND end_date >= @end_date) OR (start_date >= @start_date AND end_date <= @end_date)) AND ((TIME(start_time) <= TIME(@start_time) AND TIME(end_time) > TIME(@start_time)) OR (TIME(start_time) < TIME(@end_time) AND TIME(end_time) >= @end_time) OR (TIME(start_time) >= TIME(@start_time) AND TIME(end_time) <= @end_time))",
+                    "SELECT * FROM venue_ms.re_venue WHERE venue = @venue AND ((start_date <= @start_date AND end_date >= @start_date) OR (start_date <= @end_date AND end_date >= @end_date) OR (start_date >= @start_date AND end_date <= @end_date)) AND ((TIME(start_time) <= TIME(@start_time) AND TIME(end_time) >= TIME(@start_time)) OR (TIME(start_time) <= TIME(@end_time) AND TIME(end_time) >= @end_time) OR (TIME(start_time) >= TIME(@start_time) AND TIME(end_time) <= @end_time))",
                     con
                 );
                 cmdCheck.Parameters.AddWithValue("@venue", cmbvenue.Text);
